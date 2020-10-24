@@ -19,10 +19,9 @@ print(dataset)
 # 1,0,0 - вектор признаков, 1 - результат, второй параметр функции обучения fit
 svmClass.fit(dataset[:, :-1], dataset[:, -1])
 
-testValuses = np.array([[0, 0, 1]], float)
-svmPredict = svmClass.predict(testValuses)
+testValues = np.array([[0, 0, 1]], float)
+svmPredict = svmClass.predict(testValues)
 print(svmPredict)
-
 
 # Save - load Models
 # save the model to disk
