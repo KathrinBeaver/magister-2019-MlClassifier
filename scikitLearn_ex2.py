@@ -5,8 +5,11 @@ rawData = open("learnCoords.txt")
 svmClass = SVC()
 dataset = np.loadtxt(rawData, delimiter=",")
 
+# print(dataset)
+
 svmClass.fit(dataset[:, :-1], dataset[:, -1])
 
-testValues = np.array([[-6, -2]], float)
+testValues = np.array([[-0.0001, -50]], float)
+
 svmPredict = svmClass.predict(testValues)
 print(svmPredict)
