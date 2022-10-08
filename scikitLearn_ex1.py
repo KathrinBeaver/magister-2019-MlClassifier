@@ -1,3 +1,6 @@
+import pickle
+
+from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 import numpy as np
 #  Другие методы МL, еще больше - в библиотеке.
@@ -9,6 +12,7 @@ import numpy as np
 
 rawData = open("learn.txt")
 svmClass = SVC()
+model = LogisticRegression()
 dataset = np.loadtxt(rawData, delimiter=",")
 
 print(dataset)
@@ -18,20 +22,22 @@ print(dataset)
 # 1,0,0,1
 # 1,0,0 - вектор признаков, 1 - результат, второй параметр функции обучения fit
 svmClass.fit(dataset[:, :-1], dataset[:, -1])
+model.fit(dataset[:, :-1], dataset[:, -1])
 
-testValuses = np.array([[0, 0, 1]], float)
+testValuses = np.array([[0, 1, 0]], float)
 svmPredict = svmClass.predict(testValuses)
 print(svmPredict)
-
+regressionPredict = model.predict(testValuses)
+print(regressionPredict)
 
 # Save - load Models
 # save the model to disk
-# filename = 'model.dat'
-# pickle.dump(model, open(filename, 'wb'))
+filename = 'model.dat'
+pickle.dump(svmPredict, open(filename, 'wb'))
 #
 # ...
 #
 # load the model from disk
-# loaded_model = pickle.load(open(filename, 'rb'))
-# result = loaded_model.score(X_test, Y_test)
-# print(result)
+# model = pickle.load(open(filename, 'rb'))
+result = model.score(dataset[:, :-1], dataset[:, -1])
+print(result)
