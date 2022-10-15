@@ -24,7 +24,7 @@ print(dataset)
 svmClass.fit(dataset[:, :-1], dataset[:, -1])
 model.fit(dataset[:, :-1], dataset[:, -1])
 
-testValuses = np.array([[0, 1, 0]], float)
+testValuses = np.array([[0, 1, 1, 0, 1]], float)
 svmPredict = svmClass.predict(testValuses)
 print(svmPredict)
 regressionPredict = model.predict(testValuses)
@@ -39,5 +39,5 @@ pickle.dump(svmPredict, open(filename, 'wb'))
 #
 # load the model from disk
 # model = pickle.load(open(filename, 'rb'))
-result = model.score(dataset[:, :-1], dataset[:, -1])
-print(result)
+# result = model.score(dataset[:, :-1], dataset[:, -1])
+# print(result)
